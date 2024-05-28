@@ -10,7 +10,7 @@ public class Character : MonoBehaviour
     private AudioSource audioSource;
 
     public GameObject attackObj;
-    public float attackSpeed;
+    public float attackSpeed = 3f;
 
     public AudioClip jumpClip;
 
@@ -40,11 +40,11 @@ public class Character : MonoBehaviour
     {
         Move();
         Jump();
+        Attack();
     }
 
     private void FixedUpdate()
     {
-        Attack();
     }
 
     private void Move()
@@ -92,7 +92,13 @@ public class Character : MonoBehaviour
             if (spriteRenderer.flipX)
             {
                 GameObject obj = Instantiate(attackObj, transform.position, Quaternion.Euler(0, 180f, 0));
-                obj.GetComponent<Rigidbody>().AddForce(Vector2.left * attackSpeed, (ForceMode)ForceMode2D.Impulse);
+                obj.GetComponent<Rigidbody2D>().AddForce(Vector2.left * attackSpeed, ForceMode2D.Impulse);
+                Destroy(obj, 3f);
+            }
+            else
+            {
+                GameObject obj = Instantiate(attackObj, transform.position, Quaternion.Euler(0, 0, 0));
+                obj.GetComponent<Rigidbody2D>().AddForce(Vector2.right * attackSpeed, ForceMode2D.Impulse);
                 Destroy(obj, 3f);
             }
         }
