@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
 
     public GameObject attackObj;
     public float attackSpeed = 3f;
+    public AudioClip attackClip;
 
     public AudioClip jumpClip;
 
@@ -88,19 +89,33 @@ public class Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             animator.SetTrigger("Attack");
+            audioSource.PlayOneShot(attackClip);
 
-            if (spriteRenderer.flipX)
+            if (gameObject.name == "Warrior")
             {
-                GameObject obj = Instantiate(attackObj, transform.position, Quaternion.Euler(0, 180f, 0));
-                obj.GetComponent<Rigidbody2D>().AddForce(Vector2.left * attackSpeed, ForceMode2D.Impulse);
-                Destroy(obj, 3f);
+                attackObj.SetActive(true);
+                Invoke("SetAttackObjInactive", 0.5f);
             }
             else
             {
-                GameObject obj = Instantiate(attackObj, transform.position, Quaternion.Euler(0, 0, 0));
-                obj.GetComponent<Rigidbody2D>().AddForce(Vector2.right * attackSpeed, ForceMode2D.Impulse);
-                Destroy(obj, 3f);
+                if (spriteRenderer.flipX)
+                {
+                    GameObject obj = Instantiate(attackObj, transform.position, Quaternion.Euler(0, 180f, 0));
+                    obj.GetComponent<Rigidbody2D>().AddForce(Vector2.left * attackSpeed, ForceMode2D.Impulse);
+                    Destroy(obj, 3f);
+                }
+                else
+                {
+                    GameObject obj = Instantiate(attackObj, transform.position, Quaternion.Euler(0, 0, 0));
+                    obj.GetComponent<Rigidbody2D>().AddForce(Vector2.right * attackSpeed, ForceMode2D.Impulse);
+                    Destroy(obj, 3f);
+                }
             }
         }
+    }
+
+    private void SetAttackObjInactive()
+    {
+        attackObj.SetActive(false);
     }
 }
