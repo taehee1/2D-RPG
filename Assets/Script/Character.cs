@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,9 @@ public class Character : MonoBehaviour
     public float jumpPower = 15f;
 
     private bool isFloor = true;
+    private bool isLadder = false;
+    private bool isClimbing = false;
+    private float inputVertical;
 
 
     private void Start()
@@ -42,10 +46,51 @@ public class Character : MonoBehaviour
         Move();
         Jump();
         Attack();
+        ClimbingCheck();
     }
 
     private void FixedUpdate()
     {
+        Climbing();
+    }
+
+    private void ClimbingCheck()
+    {
+        inputVertical = Input.GetAxis("Vertical");
+        if (isLadder && Math.Abs(inputVertical) > 0)
+        {
+            isClimbing = true;
+        }
+    }
+
+    private void Climbing()
+    {
+        if (isClimbing)
+        {
+            rb.gravityScale = 0f;
+            rb.velocity = new Vector2(rb.velocity.x, inputVertical * moveSpeed);
+        }
+        else
+        {
+            rb.gravityScale = 3f;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ladder")
+        {
+            isLadder = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ladder")
+        {
+            isLadder = false;
+            isClimbing = false;
+        }
     }
 
     private void Move()
@@ -91,7 +136,7 @@ public class Character : MonoBehaviour
             animator.SetTrigger("Attack");
             audioSource.PlayOneShot(attackClip);
 
-            if (gameObject.name == "Warrior")
+            if (gameObject.name == "Warrior(Clone)")
             {
                 attackObj.SetActive(true);
                 Invoke("SetAttackObjInactive", 0.5f);
