@@ -14,6 +14,8 @@ public class Monster : MonoBehaviour
 
     public float moveSpeed = 3f;
 
+    public GameObject[] itemObj;
+
     private Animator monsterAnimator;
 
     private void Start()
@@ -75,5 +77,14 @@ public class Monster : MonoBehaviour
 
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 1.5f);
+    }
+
+    private void OnDestroy()
+    {
+        int itemRandom = Random.Range(0, itemObj.Length);
+        if (itemRandom <= itemObj.Length)
+        {
+            Instantiate(itemObj[itemRandom], new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+        }
     }
 }

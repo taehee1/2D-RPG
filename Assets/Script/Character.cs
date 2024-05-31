@@ -99,7 +99,7 @@ public class Character : MonoBehaviour
     private void Move()
     {
         //¿ÞÂÊ
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) && attackCooldown == true)
         {
             transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
             animator.SetBool("Move", true);
@@ -107,7 +107,7 @@ public class Character : MonoBehaviour
             heroSprite.flipX = true;
         }
         //¿À¸¥ÂÊ
-        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) && attackCooldown == true)
         {
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
             animator.SetBool("Move", true);
