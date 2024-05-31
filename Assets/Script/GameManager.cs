@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
-
     public string CharacterName;
     public string UserID;
 
     public float PlayerHP = 100f;
     public float PlayerEXP = 1f;
 
+    public static GameManager Instance;
+    #region Singleton
     private void Awake()
     {
         if (Instance == null)
@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(Instance);
     }
+    #endregion
 
     private void Start()
     {

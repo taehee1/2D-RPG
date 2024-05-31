@@ -10,7 +10,10 @@ public class Character : MonoBehaviour
     private Rigidbody2D rb;
     private AudioSource audioSource;
 
+    private bool attackCooldown = true;
     public GameObject attackObj;
+    public GameObject heroAttack;
+    public SpriteRenderer heroSprite;
     public float attackSpeed = 3f;
     public AudioClip attackClip;
 
@@ -101,6 +104,7 @@ public class Character : MonoBehaviour
             transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
             animator.SetBool("Move", true);
             spriteRenderer.flipX = true;
+            heroSprite.flipX = true;
         }
         //¿À¸¥ÂÊ
         else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
@@ -108,6 +112,7 @@ public class Character : MonoBehaviour
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
             animator.SetBool("Move", true);
             spriteRenderer.flipX = false;
+            heroSprite.flipX = false;
         }
         else
         {
@@ -131,7 +136,7 @@ public class Character : MonoBehaviour
 
     private void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C) && attackCooldown == true)
         {
             animator.SetTrigger("Attack");
             audioSource.PlayOneShot(attackClip);
@@ -139,7 +144,10 @@ public class Character : MonoBehaviour
             if (gameObject.name == "Warrior(Clone)")
             {
                 attackObj.SetActive(true);
+                heroAttack.SetActive(true);
+                attackCooldown = false;
                 Invoke("SetAttackObjInactive", 0.5f);
+                Invoke("SetAttackObjActive", 1.1f);
             }
             else
             {
@@ -162,5 +170,11 @@ public class Character : MonoBehaviour
     private void SetAttackObjInactive()
     {
         attackObj.SetActive(false);
+    }
+
+    private void SetAttackObjActive()
+    {
+        heroAttack.SetActive(false);
+        attackCooldown = true;
     }
 }
