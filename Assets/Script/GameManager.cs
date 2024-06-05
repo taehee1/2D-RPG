@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public string CharacterName;
     public string UserID;
-
-    public GameObject HpImg;
 
     private GameObject player;
 
@@ -40,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        HpImg.GetComponent<Slider>().value = PlayerHP;
+        
     }
 
     public GameObject SpawnPlayer(Transform spawnPos)

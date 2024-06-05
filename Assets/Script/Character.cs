@@ -98,25 +98,34 @@ public class Character : MonoBehaviour
 
     private void Move()
     {
-        //哭率
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) && attackCooldown == true)
+        if (attackCooldown == true)
         {
-            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
-            animator.SetBool("Move", true);
-            spriteRenderer.flipX = true;
-            heroSprite.flipX = true;
-        }
-        //坷弗率
-        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) && attackCooldown == true)
-        {
-            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
-            animator.SetBool("Move", true);
-            spriteRenderer.flipX = false;
-            heroSprite.flipX = false;
-        }
-        else
-        {
-            animator.SetBool("Move", false);
+            //哭率
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) && attackCooldown == true)
+            {
+                transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+                animator.SetBool("Move", true);
+                spriteRenderer.flipX = true;
+                if (gameObject.name == "Warrior(Clone)")
+                {
+                    heroSprite.flipX = true;
+                }
+            }
+            //坷弗率
+            else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) && attackCooldown == true)
+            {
+                transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+                animator.SetBool("Move", true);
+                spriteRenderer.flipX = false;
+                if (gameObject.name == "Warrior(Clone)")
+                {
+                    heroSprite.flipX = false;
+                }
+            }
+            else
+            {
+                animator.SetBool("Move", false);
+            }
         }
     }
 
@@ -124,7 +133,7 @@ public class Character : MonoBehaviour
     {
         if (isFloor)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && attackCooldown == true)
             {
                 rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                 animator.SetTrigger("Jump");

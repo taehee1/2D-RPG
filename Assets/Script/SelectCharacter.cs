@@ -9,6 +9,7 @@ public class SelectCharacter : MonoBehaviour
 {
     public Text nameTxt;
     public Text featureTxt;
+    public Text IdTxt;
     public Image charImage;
 
     public GameObject[] characters;
@@ -68,6 +69,7 @@ public class SelectCharacter : MonoBehaviour
 
     private void SetInfo()
     {
+        IdTxt.text = $"ID : {PlayerPrefs.GetString("ID")}";
         nameTxt.text = characterInfos[charIndex].Name;
         featureTxt.text = characterInfos[charIndex].Feature;
         charImage.sprite = characters[charIndex].GetComponent<SpriteRenderer>().sprite;
