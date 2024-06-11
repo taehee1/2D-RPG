@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public string CharacterName;
+    public Define.Player SelectedPlayer;
     public string UserID;
 
     private GameObject player;
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject SpawnPlayer(Transform spawnPos)
     {
-        GameObject playerPrefab = Resources.Load<GameObject>("Characters/" + GameManager.Instance.CharacterName);
+        GameObject playerPrefab = Resources.Load<GameObject>("Characters/" + SelectedPlayer.ToString());
         player = Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation);
 
         return player;

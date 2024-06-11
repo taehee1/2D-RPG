@@ -6,7 +6,6 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     private Animator animator;
-    private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private AudioSource audioSource;
 
@@ -22,6 +21,8 @@ public class Character : MonoBehaviour
     public float moveSpeed = 4f;
     public float jumpPower = 15f;
 
+    private bool isFacingRight = true;
+
     private bool isFloor = true;
     private bool isLadder = false;
     private bool isClimbing = false;
@@ -31,7 +32,6 @@ public class Character : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -105,28 +105,29 @@ public class Character : MonoBehaviour
             {
                 transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
                 animator.SetBool("Move", true);
-                spriteRenderer.flipX = true;
-                if (gameObject.name == "Warrior(Clone)")
-                {
-                    heroSprite.flipX = true;
-                }
+                if (isFacingRight) Flip();
             }
             //¿À¸¥ÂÊ
             else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) && attackCooldown == true)
             {
                 transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
                 animator.SetBool("Move", true);
-                spriteRenderer.flipX = false;
-                if (gameObject.name == "Warrior(Clone)")
-                {
-                    heroSprite.flipX = false;
-                }
+                if (!isFacingRight) Flip();
             }
             else
             {
                 animator.SetBool("Move", false);
             }
         }
+    }
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1f;
+        transform.localScale = localScale;
     }
 
     private void Jump()
@@ -152,7 +153,7 @@ public class Character : MonoBehaviour
 
             if (gameObject.name == "Warrior(Clone)")
             {
-                attackObj.SetActive(true);
+                attackObj.GetComponent<Collider2D>().enabled = true;
                 heroAttack.SetActive(true);
                 attackCooldown = false;
                 Invoke("SetAttackObjInactive", 0.5f);
@@ -160,7 +161,7 @@ public class Character : MonoBehaviour
             }
             else
             {
-                if (spriteRenderer.flipX)
+                if (!isFacingRight)
                 {
                     GameObject obj = Instantiate(attackObj, transform.position, Quaternion.Euler(0, 180f, 0));
                     obj.GetComponent<Rigidbody2D>().AddForce(Vector2.left * attackSpeed, ForceMode2D.Impulse);
@@ -178,7 +179,7 @@ public class Character : MonoBehaviour
 
     private void SetAttackObjInactive()
     {
-        attackObj.SetActive(false);
+        attackObj.GetComponent<Collider2D>().enabled = false;
     }
 
     private void SetAttackObjActive()
