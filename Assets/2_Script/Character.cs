@@ -21,7 +21,7 @@ public class Character : MonoBehaviour
     public float moveSpeed = 4f;
     public float jumpPower = 15f;
 
-    private bool isFacingRight = true;
+    private bool isFacingRight;
 
     private bool isFloor = true;
     private bool isLadder = false;
