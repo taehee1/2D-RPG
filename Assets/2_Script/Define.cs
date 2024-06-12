@@ -6,8 +6,8 @@ public class Define : MonoBehaviour
 {
     public enum Player
     {
-        Warrior,
-        Archer,
-        Mage
+        Hero,
+        Darknight,
+        Paladin
     }
 }

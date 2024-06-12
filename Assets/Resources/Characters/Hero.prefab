@@ -299,11 +299,12 @@ GameObject:
   - component: {fileID: 3075564674029387482}
   - component: {fileID: 4533910842416726609}
   - component: {fileID: 7724902133286357533}
+  - component: {fileID: 3349423781201679992}
   - component: {fileID: 4055476276792551292}
   - component: {fileID: 1166293701892424139}
   - component: {fileID: 5387313184785571695}
   m_Layer: 0
-  m_Name: Warrior
+  m_Name: Hero
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -404,6 +405,18 @@ MonoBehaviour:
   jumpClip: {fileID: 0}
   moveSpeed: 4
   jumpPower: 10
+--- !u!114 &3349423781201679992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6276281907758737471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9656cf0e2236c49933237509b57d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &4055476276792551292
 Animator:
   serializedVersion: 5

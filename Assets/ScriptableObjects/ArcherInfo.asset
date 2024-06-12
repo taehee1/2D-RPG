@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e791acc5ea2d2974193b2e29e2e109f3, type: 3}
   m_Name: ArcherInfo
   m_EditorClassIdentifier: 
-  Name: "\uC9C1\uC5C5 : \uAD81\uC218"
-  Feature: "\uD2B9\uC9D5 : \uBBFC\uCCA9\uD558\uACE0 \uC6D0\uAC70\uB9AC \uACF5\uACA9\uC744
-    \uD55C\uB2E4."
+  Name: "\uC9C1\uC5C5 : \uB2E4\uD06C\uB098\uC774\uD2B8"
+  Feature: "\uD2B9\uC9D5 : \uCC3D\uC744\uC774\uC6A9\uD55C \uBE60\uB978\uACF5\uACA9\uC744\uD55C\uB2E4"

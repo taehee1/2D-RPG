@@ -15,6 +15,9 @@ public class PlayerUI : MonoBehaviour
     private GameObject player;
     public GameObject spawnPos;
 
+    public Text coinTxt;
+    public Text monsterCountTxt;
+
     private void Start()
     {
         IdText.text = PlayerPrefs.GetString("ID");
@@ -25,10 +28,22 @@ public class PlayerUI : MonoBehaviour
     {
         display();
         HpImg.GetComponent<Slider>().value = GameManager.Instance.PlayerHP;
+        CoinDisplay();
+        MonsterCount();
     }
 
     private void display()
     {
         CharacterImg.sprite = player.GetComponent<SpriteRenderer>().sprite;
+    }
+
+    private void CoinDisplay()
+    {
+        coinTxt.text = $": {GameManager.Instance.coin}";
+    }
+
+    private void MonsterCount()
+    {
+        monsterCountTxt.text = $" {GameManager.Instance.aliveMonster}";
     }
 }

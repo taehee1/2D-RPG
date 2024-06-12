@@ -162,7 +162,7 @@ public class Character : MonoBehaviour
             animator.SetTrigger("Attack");
             audioSource.PlayOneShot(attackClip);
 
-            if (gameObject.name == "Warrior(Clone)")
+            if (gameObject.name == "Hero(Clone)")
             {
                 attackObj.GetComponent<Collider2D>().enabled = true;
                 heroAttack.SetActive(true);

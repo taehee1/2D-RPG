@@ -21,6 +21,7 @@ public class Monster : MonoBehaviour
     private void Start()
     {
         monsterAnimator = this.GetComponent<Animator>();
+        GameManager.Instance.aliveMonster += 1;
     }
 
     private void Update()
@@ -74,7 +75,7 @@ public class Monster : MonoBehaviour
         isDie = true;
         monsterAnimator.SetTrigger("Die");
         GameManager.Instance.PlayerEXP += monsterExp;
-
+        GameManager.Instance.aliveMonster -= 1;
         GetComponent<Collider2D>().enabled = false;
         Invoke("CreateItem", 1.5f);
     }

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float PlayerHP = 100f;
     public float PlayerEXP = 1f;
     public int coin = 0;
+    public int aliveMonster = 0;
 
     public static GameManager Instance;
     #region Singleton

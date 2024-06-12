@@ -13,7 +13,6 @@ public class StartManager : MonoBehaviour
     public InputField MembershipFind;
 
     [Header("Login")]
-    public GameObject LoginUi;
     public InputField LoginId;
     public InputField LoginPw;
 
@@ -24,6 +23,9 @@ public class StartManager : MonoBehaviour
     [Header("ErrorMessage")]
     public GameObject ErrorUi;
     public Text ErrorMessage;
+
+    [Header("Exit")]
+    public GameObject ExitUi;
 
     public void MembershipBtn()
     {
@@ -38,7 +40,6 @@ public class StartManager : MonoBehaviour
     {
         if (PlayerPrefs.GetString("ID") != LoginId.text)
         {
-            LoginUi.SetActive(false);
             ErrorUi.SetActive(true);
             ErrorMessage.text = "아이디가 일치하지 않습니다.";
             Invoke("ErrorExit", 3f);
@@ -47,7 +48,6 @@ public class StartManager : MonoBehaviour
 
         if (PlayerPrefs.GetString("PW") != LoginPw.text)
         {
-            LoginUi.SetActive(false);
             ErrorUi.SetActive(true);
             ErrorMessage.text = "비밀번호가 일치하지 않습니다.";
             Invoke("ErrorExit", 3f);
@@ -74,5 +74,20 @@ public class StartManager : MonoBehaviour
     void ErrorExit()
     {
         ErrorUi.SetActive(false);
+    }
+
+    public void ExitCheck()
+    {
+        ExitUi.SetActive(true);
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
+    public void DonExit()
+    {
+        ExitUi.SetActive(false);
     }
 }

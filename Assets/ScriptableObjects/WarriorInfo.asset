@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e791acc5ea2d2974193b2e29e2e109f3, type: 3}
   m_Name: WarriorInfo
   m_EditorClassIdentifier: 
-  Name: "\uC9C1\uC5C5 : \uC804\uC0AC"
-  Feature: "\uD2B9\uC9D5 : \uAC15\uD55C \uADFC\uC811 \uACF5\uACA9\uC744 \uD55C\uB2E4."
+  Name: "\uC9C1\uC5C5 : \uD788\uC5B4\uB85C"
+  Feature: "\uD2B9\uC9D5 : \uAC15\uD55C \uADFC\uC811 \uACF5\uACA9\uC744 \uD55C\uB2E4"
