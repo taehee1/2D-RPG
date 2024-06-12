@@ -20,6 +20,24 @@ public class Item : MonoBehaviour
                 Debug.Log(GameManager.Instance.PlayerHP);
                 Destroy(gameObject);
             }
+            else if (gameObject.tag == "Speed")
+            {
+                Character.Instance.moveSpeed += 5;
+                Debug.Log(Character.Instance.moveSpeed);
+                Invoke("BuffEnd", 5f);
+                Destroy(gameObject);
+            }
+            else if (gameObject.tag == "Strong")
+            {
+                Attack.Instance.damage += 10;
+                Debug.Log(Attack.Instance.damage);
+                Destroy(gameObject);
+            }
         }
+    }
+
+    private void BuffEnd()
+    {
+        Character.Instance.moveSpeed -= 10;
     }
 }

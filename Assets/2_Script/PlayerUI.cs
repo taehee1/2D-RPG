@@ -17,6 +17,8 @@ public class PlayerUI : MonoBehaviour
 
     public Text coinTxt;
     public Text monsterCountTxt;
+    public Text SpeedTxt;
+    public Text StrongTxt;
 
     private void Start()
     {
@@ -30,6 +32,8 @@ public class PlayerUI : MonoBehaviour
         HpImg.GetComponent<Slider>().value = GameManager.Instance.PlayerHP;
         CoinDisplay();
         MonsterCount();
+        Strong();
+        Speed();
     }
 
     private void display()
@@ -45,5 +49,15 @@ public class PlayerUI : MonoBehaviour
     private void MonsterCount()
     {
         monsterCountTxt.text = $" {GameManager.Instance.aliveMonster}";
+    }
+
+    private void Speed()
+    {
+        SpeedTxt.text = $"Speed : {Character.Instance.moveSpeed}";
+    }
+
+    private void Strong()
+    {
+        StrongTxt.text = $"Strength : {Attack.Instance.damage}";
     }
 }

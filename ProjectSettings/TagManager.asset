@@ -11,6 +11,8 @@ TagManager:
   - HP
   - Monster
   - Teleporter
+  - Speed
+  - Strong
   layers:
   - Default
   - TransparentFX

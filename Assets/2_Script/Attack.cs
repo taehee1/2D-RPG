@@ -6,6 +6,15 @@ public class Attack : MonoBehaviour
 {
     public float damage = 5f;
 
+    public static Attack Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     private void Update()
     {
         if (gameObject.name == "AttackObj")

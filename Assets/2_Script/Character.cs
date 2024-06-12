@@ -37,6 +37,19 @@ public class Character : MonoBehaviour
     private bool isClimbing = false;
     private float inputVertical;
 
+    public static Character Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
