@@ -9,13 +9,22 @@ public class Character : MonoBehaviour
     private Rigidbody2D rb;
     private AudioSource audioSource;
 
+    //공격
     private bool attackCooldown = true;
     public GameObject attackObj;
     public GameObject heroAttack;
-    public SpriteRenderer heroSprite;
+
+    public GameObject heroSkill1;
+    public GameObject skill1Screen;
+    public GameObject skill1Hitscan;
+    public float skill1Cooltime;
+    private bool skill1Cooldown = true;
+
+    public GameObject heroSkill2;
     public float attackSpeed = 3f;
     public AudioClip attackClip;
 
+    //움직임
     public AudioClip jumpClip;
 
     public float moveSpeed = 4f;
@@ -34,6 +43,7 @@ public class Character : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+        skill1Screen = CameraPos.Instance.screen;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -49,6 +59,7 @@ public class Character : MonoBehaviour
         Move();
         Jump();
         Attack();
+        Skill1();
         ClimbingCheck();
     }
 
@@ -98,7 +109,7 @@ public class Character : MonoBehaviour
 
     private void Move()
     {
-        if (attackCooldown == true)
+        if (attackCooldown == true && skill1Cooldown == true)
         {
             //왼쪽
             if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) && attackCooldown == true)
@@ -134,7 +145,7 @@ public class Character : MonoBehaviour
     {
         if (isFloor)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && attackCooldown == true)
+            if (Input.GetKeyDown(KeyCode.Space) && attackCooldown == true && skill1Cooldown)
             {
                 rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                 animator.SetTrigger("Jump");
@@ -175,6 +186,31 @@ public class Character : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void Skill1()
+    {
+        if (Input.GetKeyDown(KeyCode.X) && attackCooldown == true && skill1Cooldown == true)
+        {
+            heroSkill1.SetActive(true);
+            skill1Screen.SetActive(true);
+            skill1Cooldown = false;
+            Invoke("Skill1Done", 4f);
+        }
+    }
+
+    private void Skill1Done()
+    {
+        heroSkill1.SetActive(false);
+        skill1Screen.SetActive(false);
+        skill1Cooldown = true;
+        skill1Hitscan.GetComponent<Collider2D>().enabled = true;
+        Invoke("HitscanOff", 1f);
+    }
+
+    private void HitscanOff()
+    {
+        skill1Hitscan.GetComponent<Collider2D>().enabled = false;
     }
 
     private void SetAttackObjInactive()

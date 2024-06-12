@@ -9,6 +9,7 @@ TagManager:
   - Ladder
   - Coin
   - HP
+  - Monster
   layers:
   - Default
   - TransparentFX
