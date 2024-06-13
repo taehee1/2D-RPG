@@ -404,7 +404,7 @@ MonoBehaviour:
   attackClip: {fileID: 0}
   jumpClip: {fileID: 0}
   moveSpeed: 4
-  jumpPower: 10
+  jumpPower: 15
 --- !u!114 &3349423781201679992
 MonoBehaviour:
   m_ObjectHideFlags: 0

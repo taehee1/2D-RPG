@@ -14,6 +14,8 @@ public class Monster : MonoBehaviour
 
     public float moveSpeed = 3f;
 
+    public CameraShake cameraShake;
+
     public GameObject[] itemObj;
 
     private Animator monsterAnimator;
@@ -56,6 +58,7 @@ public class Monster : MonoBehaviour
         {
             monsterAnimator.SetTrigger("Attack");
             GameManager.Instance.PlayerHP -= monsterDmg;
+            StartCoroutine(cameraShake.Shake());
         }
 
         if (collision.gameObject.tag == "Attack")
