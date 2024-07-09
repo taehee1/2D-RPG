@@ -13,8 +13,20 @@ public class GameManager : MonoBehaviour
     public GameObject player;
 
     public float PlayerHP = 100f;
+    public float PlayerMP = 100f;
     public float PlayerEXP = 1f;
+    public float PlayerDef = 1f;
     public int coin = 0;
+
+    public Character Character
+    {
+        get { return player.GetComponent<Character>();}
+    }
+    
+    public Attack CharacterAttack
+    {
+        get { return Character.attackObj.GetComponent<Attack>();}
+    }
 
     public static GameManager Instance;
     #region Singleton

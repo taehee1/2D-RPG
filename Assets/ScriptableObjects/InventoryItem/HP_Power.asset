@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b68831d6119bc8f48865f5cf49dcc83f, type: 3}
-  m_Name: HP_Postion
+  m_Name: HP_Power
   m_EditorClassIdentifier: 
-  itemId: HP_Postion
-  itemName: "\uCCB4\uB825"
-  itemImage: {fileID: 21300000, guid: e52ea25af699fd445b7046374f81a5b9, type: 3}
+  itemId: HP_Power
+  itemName: "\uD30C\uC6CC\uCCB4\uB825"
+  itemImage: {fileID: 21300000, guid: d61276d76b2ee8643911990f5318f914, type: 3}
   itemPrice: 5
-  itemDescription: "\uCCB4\uB825 \uD68C\uBCF5"
+  itemDescription: "\uCCB4\uB825\uB300\uD3ED\uD68C\uBCF5"

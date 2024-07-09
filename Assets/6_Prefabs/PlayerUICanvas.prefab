@@ -261,8 +261,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterImg: {fileID: 6515710409982154754}
   IdText: {fileID: 1107157298672121365}
-  HpSlider: {fileID: 7277979501758128823}
-  spawnPos: {fileID: 0}
+  HpSlider: {fileID: 742862399941970877}
+  ExpSlider: {fileID: 1172278850193913776}
+  MpSlider: {fileID: 7277979501758128823}
 --- !u!1 &2325672819796836227
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,7 +913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.901886, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1066,7 +1067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.15566039, g: 0.21713589, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

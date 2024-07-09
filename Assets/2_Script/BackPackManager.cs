@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class BackPackManager : MonoBehaviour
@@ -9,6 +10,10 @@ public class BackPackManager : MonoBehaviour
     public Text coinTxt;
     public Image[] itemImages;
     private InventoryItemData[] inventoryItemDatas;
+
+    private int defItemUsingCount = 0;
+    private int speedItemUsingCount = 0;
+    private int powerItemUsingCount = 0;
 
     public static BackPackManager instance;
 
@@ -48,5 +53,110 @@ public class BackPackManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void ItemUse()
+    {
+        int siblingIndex = EventSystem.current.currentSelectedGameObject.transform.parent.GetSiblingIndex();
+        InventoryItemData inventoryItem = inventoryItemDatas[siblingIndex];
+        if (inventoryItem == null) return;
+
+        if (inventoryItem.itemId == "HP")
+        {
+            GameManager.Instance.PlayerHP += 10f;
+            GameManager.Instance.PlayerHP = Mathf.Min(GameManager.Instance.PlayerHP, 100f);
+            PopupMsgManager.instance.ShowPopupMessage("체력이 10 회복되었습니다");
+        }
+        else if (inventoryItem.itemId == "MP")
+        {
+            GameManager.Instance.PlayerMP += 10f;
+            GameManager.Instance.PlayerMP = Mathf.Min(GameManager.Instance.PlayerMP, 100f);
+            PopupMsgManager.instance.ShowPopupMessage("마나가 10 회복되었습니다");
+        }
+        else if (inventoryItem.itemId == "HP_Power")
+        {
+            GameManager.Instance.PlayerHP += 100f;
+            PopupMsgManager.instance.ShowPopupMessage("체력이 전부 회복되었습니다");
+        }
+        else if (inventoryItem.itemId == "MP_Power")
+        {
+            GameManager.Instance.PlayerMP += 100f;
+            PopupMsgManager.instance.ShowPopupMessage("마나가 전부 회복되었습니다");
+        }
+        else if (inventoryItem.itemId == "Shield")
+        {
+            StartCoroutine(DefItem());
+        }
+        else if (inventoryItem.itemId == "Boots")
+        {
+            StartCoroutine(SpeedItem());
+        }
+        else if (inventoryItem.itemId == "Sword")
+        {
+            StartCoroutine(PowerItem());
+        }
+        else if (inventoryItem.itemId == "Super")
+        {
+            
+        }
+        else
+        {
+            Debug.Log($"존재하지 않는 itemid[{inventoryItem.itemId}]");
+            return;
+        }
+
+        inventoryItemDatas[siblingIndex] = null;
+        EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = null;
+    }
+
+    IEnumerator DefItem()
+    {
+        defItemUsingCount++;
+        GameManager.Instance.PlayerDef *= 2;
+        GameManager.Instance.Character.GetComponent<SpriteRenderer>().color = Color.blue;
+        Debug.Log("Def : " + GameManager.Instance.PlayerDef);
+        yield return new WaitForSeconds(10f);
+
+        defItemUsingCount--;
+        GameManager.Instance.PlayerDef /= 2;
+        if (defItemUsingCount == 0)
+        {
+            GameManager.Instance.Character.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        Debug.Log("Def : " + GameManager.Instance.PlayerDef);
+    }
+
+    IEnumerator SpeedItem()
+    {
+        speedItemUsingCount++;
+        GameManager.Instance.Character.moveSpeed *= 2;
+        GameManager.Instance.Character.GetComponent<SpriteRenderer>().color = Color.red;
+        Debug.Log("Speed : " + GameManager.Instance.Character.moveSpeed);
+        yield return new WaitForSeconds(10f);
+
+        speedItemUsingCount--;
+        GameManager.Instance.Character.moveSpeed /= 2;
+        if (speedItemUsingCount == 0)
+        {
+            GameManager.Instance.Character.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        Debug.Log("Speed : " + GameManager.Instance.Character.moveSpeed);
+    }
+
+    IEnumerator PowerItem()
+    {
+        powerItemUsingCount++;
+        GameManager.Instance.CharacterAttack.damage *= 2;
+        GameManager.Instance.Character.GetComponent<SpriteRenderer>().color = Color.green;
+        Debug.Log("Damage : " + GameManager.Instance.CharacterAttack.damage);
+        yield return new WaitForSeconds(10f);
+
+        powerItemUsingCount--;
+        GameManager.Instance.CharacterAttack.damage /= 2;
+        if (powerItemUsingCount == 0)
+        {
+            GameManager.Instance.Character.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        Debug.Log("Damage : " + GameManager.Instance.CharacterAttack.damage);
     }
 }
