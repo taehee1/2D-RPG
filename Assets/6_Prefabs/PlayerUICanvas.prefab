@@ -260,7 +260,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterImg: {fileID: 6515710409982154754}
-  IdText: {fileID: 1107157298672121365}
+  IdText: {fileID: 8524366369198408925}
+  LvText: {fileID: 1107157298672121365}
   HpSlider: {fileID: 742862399941970877}
   ExpSlider: {fileID: 1172278850193913776}
   MpSlider: {fileID: 7277979501758128823}

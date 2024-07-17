@@ -54,7 +54,7 @@ public class Monster : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             monsterAnimator.SetTrigger("Attack");
-            GameManager.Instance.PlayerHP -= monsterDmg;
+            GameManager.Instance.PlayerStat.PlayerHP -= monsterDmg;
         }
 
         if (collision.gameObject.tag == "Attack")
@@ -73,7 +73,7 @@ public class Monster : MonoBehaviour
     {
         isDie = true;
         monsterAnimator.SetTrigger("Die");
-        GameManager.Instance.PlayerEXP += monsterExp;
+        GameManager.Instance.PlayerStat.PlayerEXP += monsterExp;
 
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 1.5f);

@@ -8020,15 +8020,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e224dcf3e63f7748b35c01a4525037f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterName: Warrior
+  SelectedPlayer: 2
   UserID: "\uB108\uAC80"
-  HpImg: {fileID: 1309543589}
+  PlayerStat:
+    PlayerHP: 100
+    PlayerMP: 100
+    PlayerEXP: 1
+    PlayerDef: 1
+    PlayerLv: 1
+    coin: 0
   player: {fileID: 0}
-  PlayerHP: 100
-  PlayerMP: 100
-  PlayerEXP: 1
-  PlayerDef: 0
-  coin: 1000
+  HpImg: {fileID: 1309543589}
 --- !u!4 &1551183802
 Transform:
   m_ObjectHideFlags: 0

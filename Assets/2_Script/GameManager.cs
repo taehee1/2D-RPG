@@ -3,20 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+[System.Serializable]
+
+public class CharacterStat
 {
-    public string CharacterName;
-    public string UserID;
-
-    public GameObject HpImg;
-
-    public GameObject player;
-
     public float PlayerHP = 100f;
     public float PlayerMP = 100f;
     public float PlayerEXP = 1f;
     public float PlayerDef = 1f;
+    public int PlayerLv = 1;
     public int coin = 0;
+
+}
+
+public class GameManager : MonoBehaviour
+{
+    //public string CharacterName;
+    public Define.Player SelectedPlayer;
+    public string UserID;
+    public CharacterStat PlayerStat = new CharacterStat();
+    [HideInInspector]
+    public GameObject player;
+
+    public GameObject HpImg;
 
     public Character Character
     {
@@ -52,12 +61,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        HpImg.GetComponent<Slider>().value = PlayerHP;
+        HpImg.GetComponent<Slider>().value = PlayerStat.PlayerHP;
     }
 
     public GameObject SpawnPlayer(Transform spawnPos)
     {
-        GameObject playerPrefab = Resources.Load<GameObject>("Characters/" + GameManager.Instance.CharacterName);
+        GameObject playerPrefab = Resources.Load<GameObject>("Characters/" + SelectedPlayer.ToString());
         player = Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation);
 
         return player;

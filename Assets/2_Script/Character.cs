@@ -27,6 +27,8 @@ public class Character : MonoBehaviour
     private bool isClimbing = false;
     private float inputVertical;
 
+    private bool faceRight = true;
+
 
     private void Start()
     {
@@ -103,21 +105,28 @@ public class Character : MonoBehaviour
         {
             transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
             animator.SetBool("Move", true);
-            spriteRenderer.flipX = true;
-            heroSprite.flipX = true;
+            if (faceRight) Flip();
         }
         //¿À¸¥ÂÊ
         else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) && attackCooldown == true)
         {
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
             animator.SetBool("Move", true);
-            spriteRenderer.flipX = false;
-            heroSprite.flipX = false;
+            if (!faceRight) Flip();
         }
         else
         {
             animator.SetBool("Move", false);
         }
+    }
+
+    private void Flip()
+    {
+        faceRight = !faceRight;
+
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
     }
 
     private void Jump()
@@ -151,7 +160,7 @@ public class Character : MonoBehaviour
             }
             else
             {
-                if (spriteRenderer.flipX)
+                if (!faceRight)
                 {
                     GameObject obj = Instantiate(attackObj, transform.position, Quaternion.Euler(0, 180f, 0));
                     obj.GetComponent<Rigidbody2D>().AddForce(Vector2.left * attackSpeed, ForceMode2D.Impulse);
