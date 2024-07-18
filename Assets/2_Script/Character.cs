@@ -174,6 +174,11 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void AttackAnimation()
+    {
+        animator.SetTrigger("Attack");
+    }
+
     private void SetAttackObjInactive()
     {
         attackObj.SetActive(false);

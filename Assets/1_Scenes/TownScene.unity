@@ -7068,6 +7068,10 @@ MonoBehaviour:
   SkillExplainUi: {fileID: 594714010}
   SkillImage: {fileID: 983001109}
   SkillText: {fileID: 323001260}
+  Skills:
+  - {fileID: 1779940713}
+  - {fileID: 892272380}
+  - {fileID: 880332696}
 --- !u!1 &1155031815
 GameObject:
   m_ObjectHideFlags: 0
@@ -8672,15 +8676,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e224dcf3e63f7748b35c01a4525037f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectedPlayer: 2
+  SelectedPlayer: 0
   UserID: "\uB108\uAC80"
   PlayerStat:
     PlayerHP: 100
     PlayerMP: 100
     PlayerEXP: 1
     PlayerDef: 1
-    PlayerLv: 1
-    coin: 0
+    PlayerLv: 1111111
+    coin: 10000
   player: {fileID: 0}
   HpImg: {fileID: 1309543589}
 --- !u!4 &1551183802
